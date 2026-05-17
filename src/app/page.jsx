@@ -181,7 +181,7 @@ function Services() {
               Stunning, well-structured presentations designed to impress your
               professors and ace your viva, seminar, or pitch.
             </ListItem>
-            <ListItem title="Custome Academic Help">
+            <ListItem title="Custom Academic Help">
               Research papers, dissertations, case studies, lab reports,
               exam preparation — whatever your academic challenge, we have the expert for it.
             </ListItem>
@@ -223,7 +223,7 @@ export default async function Home() {
         className="mt-24 sm:mt-32 lg:mt-40"
         client={{ name: 'Arizona', logo: arizonaDark }}
       >
-        The team at Studio went above and beyond with our onboarding, even
+        The team at UpthriveWork went above and beyond with our onboarding, even
         finding a way to access the user’s microphone without triggering one of
         those annoying permission dialogs.
       </Testimonial>
