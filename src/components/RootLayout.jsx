@@ -52,7 +52,7 @@ function Header({
 
   return (
     <Container>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between -ml-7">
         <Link
           href="/"
           aria-label="Home"
