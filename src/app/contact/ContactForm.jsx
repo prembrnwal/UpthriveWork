@@ -43,7 +43,6 @@ export function ContactForm() {
     const data = {
       name: form.elements.namedItem('name').value,
       email: form.elements.namedItem('email').value,
-      university: form.elements.namedItem('university').value,
       phone: form.elements.namedItem('phone').value,
       message: form.elements.namedItem('message').value,
       deadline: form.elements.namedItem('deadline').value,
@@ -82,11 +81,6 @@ export function ContactForm() {
             type="email"
             name="email"
             autoComplete="email"
-          />
-          <TextInput
-            label="University"
-            name="university"
-            autoComplete="organization"
           />
           <TextInput label="Phone" type="tel" name="phone" autoComplete="tel" />
           <TextInput label="Message" name="message" />
