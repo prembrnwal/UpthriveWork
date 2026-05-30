@@ -17,11 +17,30 @@ export const metadata = {
     'Explore tips, guides, and insights from the UpthriveWork Hub team to help students excel in their academic journey.',
 }
 
+const blogListSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  'name': 'UpthriveWork Blog',
+  'description': 'Explore tips, guides, and insights from the UpthriveWork Hub team to help students excel in their academic journey.',
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'UpthriveWork',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://upthrive-work.vercel.app/icon.svg'
+    }
+  }
+}
+
 export default async function Blog() {
   let articles = await loadArticles()
 
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogListSchema) }}
+      />
       <PageIntro eyebrow="Blog" title="Tips, guides, and academic insights">
         <p>
           Explore expert advice, how-to guides, and academic tips shared by
@@ -51,7 +70,7 @@ export default async function Blog() {
                         <dd className="mt-6 flex gap-x-4">
                           <div className="flex-none overflow-hidden rounded-xl bg-neutral-100">
                             <Image
-                              alt=""
+                              alt={article.author.name}
                               src={article.author.image.src}
                               width={48}
                               height={48}

@@ -46,7 +46,7 @@ function Section({ title, image, children }) {
 
 function Discover() {
   return (
-    <Section title="Discover" image={{ src: discoverImg }}>
+    <Section title="Discover" image={{ src: discoverImg, alt: "UpthriveWork Academic Project Discovery Phase" }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           We start by understanding your{' '}
@@ -84,7 +84,7 @@ function Discover() {
 
 function Build() {
   return (
-    <Section title="Build" image={{ src: buildImg }}>
+    <Section title="Build" image={{ src: buildImg, alt: "UpthriveWork Academic Project Building Phase" }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           Once requirements are confirmed, our assigned expert begins working on
@@ -120,7 +120,7 @@ function Build() {
 
 function Deliver() {
   return (
-    <Section title="Deliver" image={{ src: deliverImg }}>
+    <Section title="Deliver" image={{ src: deliverImg, alt: "UpthriveWork Academic Project Quality Check and Delivery Phase" }}>
       <div className="space-y-6 text-base text-neutral-600">
         <p>
           Once the quality check is complete, we deliver your work well within
@@ -227,9 +227,40 @@ export const metadata = {
     'At UpthriveWork Hub we follow a simple, transparent process to deliver high quality academic work on time, every time.',
 }
 
+const processSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  'name': 'How UpthriveWork Delivers Academic Projects',
+  'description': 'Our simple three-step process designed to deliver outstanding academic work on time, every time.',
+  'step': [
+    {
+      '@type': 'HowToStep',
+      'name': 'Discover',
+      'text': 'We gather project requirements, match students with appropriate academic specialists, and confirm details before starting work.',
+      'url': 'https://upthrive-work.vercel.app/process#discover'
+    },
+    {
+      '@type': 'HowToStep',
+      'name': 'Build',
+      'text': 'Our academic experts execute tasks in line with university rubrics, providing progress updates and performing internal quality review.',
+      'url': 'https://upthrive-work.vercel.app/process#build'
+    },
+    {
+      '@type': 'HowToStep',
+      'name': 'Deliver',
+      'text': 'We run plagiarism and authenticity checks, deliver the final code or document on time, and offer revision and post-delivery support.',
+      'url': 'https://upthrive-work.vercel.app/process#deliver'
+    }
+  ]
+}
+
 export default function Process() {
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(processSchema) }}
+      />
       <PageIntro eyebrow="Our process" title="How we deliver your work">
         <p>
           We follow a simple, transparent three-step process to ensure every

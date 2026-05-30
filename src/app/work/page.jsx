@@ -38,7 +38,7 @@ function CaseStudies({ caseStudies }) {
                   <div className="sm:flex sm:items-center sm:gap-x-6 lg:block">
                     <Image
                       src={caseStudy.logo}
-                      alt=""
+                      alt={`${caseStudy.client} Logo`}
                       className="h-16 w-16 flex-none"
                       unoptimized
                     />
@@ -143,11 +143,30 @@ export const metadata = {
     'Explore how UpthriveWork Hub has helped students deliver outstanding academic work across a wide range of subjects and disciplines.',
 }
 
+const workCollectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  'name': 'UpthriveWork Case Studies',
+  'description': 'Explore how UpthriveWork Hub has helped students deliver outstanding academic work across a wide range of subjects and disciplines.',
+  'publisher': {
+    '@type': 'Organization',
+    'name': 'UpthriveWork',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://upthrive-work.vercel.app/icon.svg'
+    }
+  }
+}
+
 export default async function Work() {
   let caseStudies = await loadCaseStudies()
 
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(workCollectionSchema) }}
+      />
       <PageIntro
         eyebrow="Our work"
         title="Real results for real students."

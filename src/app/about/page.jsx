@@ -104,7 +104,7 @@ function Team() {
                       <FadeIn>
                         <div className="group relative overflow-hidden rounded-3xl bg-neutral-100">
                           <Image
-                            alt=""
+                            alt={person.name}
                             src={person.image.src}
                             width={400}
                             height={400}
@@ -139,11 +139,25 @@ export const metadata = {
     'UpthriveWork Hub is a student-focused academic help platform built by experts committed to quality, confidentiality, and on-time delivery.',
 }
 
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  'mainEntity': {
+    '@type': 'Organization',
+    'name': 'UpthriveWork',
+    'description': 'UpthriveWork Hub is a student-focused academic help platform built by experts committed to quality, confidentiality, and on-time delivery.'
+  }
+}
+
 export default async function About() {
   let blogArticles = (await loadArticles()).slice(0, 2)
 
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutSchema) }}
+      />
       <PageIntro eyebrow="About us" title="Your academic success is our mission">
         <p>
           We believe that our strength lies in our student-first approach, which

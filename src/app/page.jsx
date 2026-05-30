@@ -159,6 +159,7 @@ function Services() {
                 src={studentIllustration}
                 sizes="(min-width: 1024px) 41rem, 31rem"
                 className="justify-center lg:justify-end"
+                alt="Student studying with expert academic support illustration"
               />
             </FadeIn>
           </div>
@@ -197,11 +198,47 @@ export const metadata = {
     'UpthriveWork is a student-focused hub delivering full stack projects, AI/ML solutions, assignments, presentations, and custom academic help.',
 }
 
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  'name': 'UpthriveWork',
+  'image': 'https://upthrive-work.vercel.app/icon.svg',
+  '@id': 'https://upthrive-work.vercel.app/#service',
+  'url': 'https://upthrive-work.vercel.app',
+  'telephone': '',
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': 'Virtual Service',
+    'addressLocality': 'Global',
+    'addressCountry': 'US'
+  },
+  'priceRange': '$$',
+  'description': 'UpthriveWork is a student-focused hub delivering full stack projects, AI/ML solutions, assignments, presentations, and custom academic help.',
+  'openingHoursSpecification': {
+    '@type': 'OpeningHoursSpecification',
+    'dayOfWeek': [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ],
+    'opens': '00:00',
+    'closes': '23:59'
+  }
+}
+
 export default async function Home() {
   let caseStudies = (await loadCaseStudies()).slice(0, 3)
 
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <Container className="mt-24 sm:mt-32 md:mt-56">
         <FadeIn className="max-w-3xl">
           <h1 className="font-display text-5xl font-medium tracking-tight text-balance text-neutral-950 sm:text-7xl">

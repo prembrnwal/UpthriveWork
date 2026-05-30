@@ -13,8 +13,66 @@ export default async function BlogArticleWrapper({ article, children }) {
     .filter(({ metadata }) => metadata !== article)
     .slice(0, 2)
 
+  const blogPostingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    'headline': article.title,
+    'description': article.description,
+    'datePublished': article.date,
+    'author': {
+      '@type': 'Person',
+      'name': article.author.name,
+      'image': article.author.image.src
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'UpthriveWork',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://upthrive-work.vercel.app/icon.svg'
+      }
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://upthrive-work.vercel.app${article.href}`
+    }
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://upthrive-work.vercel.app'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Blog',
+        'item': 'https://upthrive-work.vercel.app/blog'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': article.title,
+        'item': `https://upthrive-work.vercel.app${article.href}`
+      }
+    ]
+  }
+
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <Container as="article" className="mt-24 sm:mt-32 lg:mt-40">
         <FadeIn>
           <header className="mx-auto flex max-w-5xl flex-col text-center">

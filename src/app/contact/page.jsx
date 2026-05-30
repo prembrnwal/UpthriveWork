@@ -122,9 +122,24 @@ export const metadata = {
   description: 'Get in touch with UpthriveWork Hub. We are ready to help you succeed.',
 }
 
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  'mainEntity': {
+    '@type': 'Organization',
+    'name': 'UpthriveWork',
+    'email': 'upthrivework@gmail.com',
+    'description': 'Contact UpthriveWork Hub to request full stack projects, AI/ML solutions, presentations, or custom assignments.'
+  }
+}
+
 export default function Contact() {
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
+      />
       <PageIntro eyebrow="Contact us" title="Let's get your work done">
         <p>Tell us what you need and we'll get back to you right away.</p>
       </PageIntro>

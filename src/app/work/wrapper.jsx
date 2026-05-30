@@ -14,8 +14,65 @@ export default async function CaseStudyLayout({ caseStudy, children }) {
     .filter(({ metadata }) => metadata !== caseStudy)
     .slice(0, 2)
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': caseStudy.title,
+    'description': caseStudy.description,
+    'datePublished': caseStudy.date ? `${caseStudy.date}-01` : undefined,
+    'author': {
+      '@type': 'Organization',
+      'name': 'UpthriveWork'
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': 'UpthriveWork',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://upthrive-work.vercel.app/icon.svg'
+      }
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://upthrive-work.vercel.app${caseStudy.href}`
+    }
+  }
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://upthrive-work.vercel.app'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Work',
+        'item': 'https://upthrive-work.vercel.app/work'
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': caseStudy.title,
+        'item': `https://upthrive-work.vercel.app${caseStudy.href}`
+      }
+    ]
+  }
+
   return (
     <RootLayout>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <article className="mt-24 sm:mt-32 lg:mt-40">
         <header>
           <PageIntro eyebrow="Case Study" title={caseStudy.title} centered>
